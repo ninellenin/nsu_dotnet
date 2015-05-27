@@ -10,7 +10,7 @@ namespace Sazonova.NsuDotNetCourse.NumberGuess
     {
         static int MinValue = 0;
         static int MaxValue = 100;
-        static string quit = "q";
+        static string Quit = "q";
         static string Proposal;
         enum Comparation
         { 
@@ -51,7 +51,7 @@ namespace Sazonova.NsuDotNetCourse.NumberGuess
                 Console.WriteLine(Proposal);
                 answer = Console.ReadLine();
 
-                if (quit.CompareTo(answer) == 0)
+                if (Quit.CompareTo(answer) == 0)
                 {
                     Console.WriteLine(SorryMessage);
                     break;

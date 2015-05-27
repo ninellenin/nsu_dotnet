@@ -9,7 +9,7 @@ namespace Sazonova.NsuDotNetCourse.NumberGuess
     class NumberGuess
     {
         static int MinValue = 0;
-        static int MaxValue = 10;
+        static int MaxValue = 100;
         static string quit = "q";
         static string Proposal;
         enum Comparation

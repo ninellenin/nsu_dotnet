@@ -30,6 +30,7 @@ namespace Sazonova.NsuDotNetCourse.NumberGuess
         static string AttemptsMessage = "Number of attempts: ";
         static string LoserMessage = "You are looser, {0}";
         static string TimeMessage = "Time is {0} min.";
+        static string IsNotNumberMessage = "It should be number.";
 
         static void Main(string[] args)
         {
@@ -49,21 +50,35 @@ namespace Sazonova.NsuDotNetCourse.NumberGuess
                 int number = rand.Next(MinValue, MaxValue);
 
                 Console.WriteLine(Proposal);
+              
                 answer = Console.ReadLine();
-
+                    
                 if (Quit.CompareTo(answer) == 0)
                 {
                     Console.WriteLine(SorryMessage);
-                    break;
+                    return;
                 }
+                int guess;
+             
+                while (!int.TryParse(answer, out guess))
+                {
+                    Console.WriteLine(IsNotNumberMessage); 
+                    
+                    answer = Console.ReadLine();
 
-                int guess = int.Parse(answer);
+                    if (Quit.CompareTo(answer) == 0)
+                    {
+                        Console.WriteLine(SorryMessage);
+                        return;
+                    }
+
+                }
                 if (guess == number)
                 {
-                    history[count] = Comparation.Nearly;
+                    history[count % HistoryLength] = Comparation.Nearly;
 
                     Console.WriteLine(String.Concat(AttemptsMessage, count + 1));
-                    for (int i = 0; i < count; ++i)
+                    for (int i = 0; i < count % HistoryLength; ++i)
                     {
                         Console.Write("{0}: ", i);
                         switch (history[i]) 
@@ -88,11 +103,11 @@ namespace Sazonova.NsuDotNetCourse.NumberGuess
                     failCount++;
                     if (number > guess)
                     {
-                        history[count] = Comparation.Less;
+                        history[count % HistoryLength] = Comparation.Less;
                     }
                     else
                     {
-                        history[count] = Comparation.Larger;
+                        history[count % HistoryLength] = Comparation.Larger;
                     }
                     if (failCount == 4) 
                     {
